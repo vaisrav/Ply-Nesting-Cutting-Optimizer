@@ -3,6 +3,8 @@
 export default function packPanelsIntoPlies(ply, panels) {
   const plyWidth = Number(ply.length);
   const plyHeight = Number(ply.breadth);
+  const kerf = Number(ply.kerf);
+  const kerfPadding = kerf * 2;
 
   // 1. Expand quantities → flatten list
   let expandedPanels = [];
@@ -10,10 +12,16 @@ export default function packPanelsIntoPlies(ply, panels) {
     for (let i = 0; i < Number(p.quantity); i++) {
       expandedPanels.push({
         name: p.name,
-        width: Number(p.length),
-        height: Number(p.breadth),
+
+        // REAL panel size (for output)
+        realWidth: Number(p.length),
+        realHeight: Number(p.breadth),
+
+        //EFFECTIVE panel size (for packing)
+        width: Number(p.length) + kerfPadding,
+        height: Number(p.breadth) + kerfPadding,
       });
-      console.log("expandedPanels:" + expandedPanels)
+      console.log("expandedPanels:", expandedPanels)
     }
   });
 
@@ -122,8 +130,8 @@ function placePanel(placement, ply) {
     name: panel.name,
     x: rect.x,
     y: rect.y,
-    width,
-    height,
+    width: panel.realWidth,
+    height: panel.realHeight,
     rotated
   });
 
@@ -153,5 +161,9 @@ function placePanel(placement, ply) {
   });
 
   // 5. Track waste rectangles (optional)
-  ply.wasteRectangles = ply.freeRects;
+  ply.wasteRectangles = [...ply.freeRects];
+
+  // 6. Remove rectagles that dont fit with in kerf
+  ply.freeRects = ply.freeRects.filter(r => r.width >= 20 && r.height >= 20);
+
 }

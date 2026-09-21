@@ -3,6 +3,7 @@ import PlyInput from "./components/PlyInput";
 import PanelInput from "./components/PanelInput";
 import packPanelsIntoPlies from "./utils/packPanelsIntoPlies";
 import "./App.css";
+import Visualizer from "./components/Visualizer";
 
 export default function App() {
   const [ply, setPly] = useState(null);
@@ -27,11 +28,10 @@ export default function App() {
     <div className="p-6 space-y-6">
       <h1 className="text-3xl font-bold">Ply Cut Calculator</h1>
 
-      {/* Ply Input */}
-      <PlyInput onSubmit={setPly} />
-
-      {/* Panel Input */}
-      <PanelInput onPanelsChange={setPanels} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <PlyInput onSubmit={setPly} />
+        <PanelInput onPanelsChange={setPanels} />
+      </div>
 
       {/* Generate Button */}
       <button
@@ -62,8 +62,8 @@ export default function App() {
               <ul className="list-disc ml-6">
                 {ply.panels.map((panel, i) => (
                   <li key={i}>
-                    {panel.name} — {panel.width}×{panel.height} at ({panel.x},{panel.y})
-                    {panel.rotated && " (rotated)"}
+                    {panel.name} — {panel.width}×{panel.height} at ({panel.x},
+                    {panel.y}){panel.rotated && " (rotated)"}
                   </li>
                 ))}
               </ul>
@@ -80,6 +80,8 @@ export default function App() {
           ))}
         </div>
       )}
+
+      {result && <Visualizer plies={result.plies} />}
     </div>
   );
 }

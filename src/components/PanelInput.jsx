@@ -42,7 +42,7 @@ export default function PanelInput({ onPanelsChange }) {
 
   return (
     <div className="p-4">
-      <h2 className="p-4">Enter Panel dimensions</h2>
+      <h2 >Enter Panel dimensions</h2>
 
       <form className="space-y-4 max-w-md p-4 border rounded-lg">
         <div>
