@@ -94,11 +94,11 @@ export default function PlyInput({ onSubmit }) {
       </form>
 
       {savedPly && (
-        <div className="mt-6 p-4 border rounded-lg bg-gray-50">
+        <div className="mt-6 p-4 border rounded-lg ">
           <h2 className="font-bold mb-2">Ply Entered</h2>
 
           <ul className="space-y-2">
-            <li className="border p-3 rounded bg-white">
+            <li className="border p-3 rounded ">
               <p><strong>Length:</strong> {savedPly.length} mm</p>
               <p><strong>Breadth:</strong> {savedPly.breadth} mm</p>
               <p><strong>Thickness:</strong> {savedPly.thickness}</p>

@@ -107,7 +107,7 @@ export default function PanelInput({ onPanelsChange }) {
 
           <ul className="space-y-2">
             {panels.map((panel, index) => (
-              <li key={index} className="border p-3 rounded bg-white">
+              <li key={index} className="border p-3 rounded ">
                 <p><strong>Name:</strong> {panel.name}</p>
                 <p><strong>Length:</strong> {panel.length}</p>
                 <p><strong>Breadth:</strong> {panel.breadth}</p>
